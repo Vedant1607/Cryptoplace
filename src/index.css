@@ -1,6 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins&display=swap');
 @import "tailwindcss";
 
+/* define custom theme values */
+@theme {
+  --font-outfit: "Outfit", sans-serif;
+}
+
 @layer base {
+  body {
+    @apply font-outfit;   /*Outfit is now global default */
+  }
+
   a {
     @apply no-underline text-inherit;
   }

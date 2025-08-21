@@ -1,7 +1,31 @@
 import logo from "@/assets/logo.png";
 import arrow_icon from "@/assets/arrow_icon.png";
+import { useContext } from "react";
+import { CoinContext } from "../../context/CoinContext";
 
 const Navbar = () => {
+
+  const {setCurrency} = useContext(CoinContext);
+  const currencyHandler = (event) => {
+    switch (event.target.value) {
+      case "usd": {
+        setCurrency({name:"usd", symbol:"$"});
+        break;
+      }
+      case "eur": {
+        setCurrency({ name: "eur", symbol: "€" });
+        break;
+      }
+      case "inr": {
+        setCurrency({ name: "inr", symbol: "₹" });
+        break;
+      }
+      default:{
+        setCurrency({name:"usd",symbol:"$"});
+        break;
+      }
+    }
+  }
   return (
     <div className="flex items-center justify-between py-5 px-[10%] text-[#ddd] border-b-2 border-[#3c3c3c]">
       <img src={logo} alt="cryptoplace-logo" className="w-[max(12vw,120px)]" />
@@ -13,11 +37,11 @@ const Navbar = () => {
       </ul>
 
       <div className="flex items-center gap-[max(1vw,12px)]">
-        <select className="px-2 py-1 rounded-md border-2 border-white bg-transparent text-white">
+        <select onChange={currencyHandler} className="px-2 py-1 rounded-md border-2 border-white bg-transparent text-white">
           <option value="usd" className="bg-[#09005c] text-white">
             USD
           </option>
-          <option value="euro" className="bg-[#09005c] text-white">
+          <option value="eur" className="bg-[#09005c] text-white">
             EURO
           </option>
           <option value="inr" className="bg-[#09005c] text-white">

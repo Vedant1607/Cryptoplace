@@ -5,10 +5,11 @@ import Coin from "@/pages/Coin/Coin";
 
 const App = () => {
   return (
-    <div class="min-h-screen text-white bg-gradient-to-b from-[#0b004e] via-[#1d152f] to-[#002834]">
+    <div className="min-h-screen text-white bg-gradient-to-b from-[#0b004e] via-[#1d152f] to-[#002834]">
       <Navbar/>
       <Routes>
         <Route path="/" element={<Home/>}></Route>
+        <Route path="/coin/:coinId" element={<Coin/>}></Route>
       </Routes>
     </div>
   )

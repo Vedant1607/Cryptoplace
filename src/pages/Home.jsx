@@ -20,11 +20,13 @@ const Home = () => {
           explore more about cryptos.
         </p>
 
+        {/* Hero form with responsive input width */}
         <form className="p-2 w-4/5 bg-white rounded-[5px] text-[20px] flex justify-between items-center gap-[10px]">
           <input
             type="text"
             placeholder="Search crypto.."
-            className="flex-1 text-base outline-none border-none pl-3 text-black placeholder-gray-400"
+            className="flex-1 text-base outline-none border-none pl-3 text-black placeholder-gray-400
+                       max-[500px]:w-[100px] max-[500px]:min-w-[100px] max-[500px]:flex-none"
           />
           <button
             type="submit"
@@ -35,24 +37,32 @@ const Home = () => {
         </form>
       </div>
       <div className="max-w-[800px] m-auto rounded-[15px] bg-[linear-gradient(rgba(84,3,255,0.15),rgba(105,2,153,0.15))]">
-        <div className="grid grid-cols-[0.5fr_2fr_1fr_1fr_1.5fr] p-[15px_20px] items-center border-b border-[#3c3c3c]">
+        {/* Table Header - Responsive grid columns */}
+        <div className="grid grid-cols-[0.5fr_3fr_1fr_1fr] md:grid-cols-[0.5fr_2fr_1fr_1fr_1.5fr] p-[15px_20px] items-center border-b border-[#3c3c3c]
+                        text-[13px] md:text-base">
           <p>#</p>
           <p>Coins</p>
           <p>Price</p>
           <p className="text-center">24H Change</p>
-          <p className="text-right">Market Cap</p>
+          <p className="text-right hidden md:block">Market Cap</p>
         </div>
         {
           displayCoin.slice(0,10).map((item, index) => (
-            <div key={index} className="grid grid-cols-[0.5fr_2fr_1fr_1fr_1.5fr] p-[15px_20px] items-center border-b border-[#3c3c3c] last:border-none">
+            <div key={index} className="grid grid-cols-[0.5fr_3fr_1fr_1fr] md:grid-cols-[0.5fr_2fr_1fr_1fr_1.5fr] p-[15px_20px] items-center border-b border-[#3c3c3c] last:border-none
+                                      text-[13px] md:text-base">
               <p>{item.market_cap_rank}</p>
               <div className="flex items-center gap-3">
-                <img src={item.image} className="w-[35px]"/>
+                <img 
+                  src={item.image} 
+                  className="w-[25px] md:w-[35px]"
+                  alt={item.name}
+                />
                 <p>{item.name + " - " + item.symbol}</p>
               </div>
               <p>{currency.symbol} {item.current_price.toLocaleString()}</p>
-              <p className={item.price_change_percentage_24h > 0 ? "text-green-600 text-center items-center":"text-red-600 items-center"}>{Math.round(item.price_change_percentage_24h*100)/100}</p>
-              <p className="text-right">{currency.symbol} {item.market_cap.toLocaleString()}</p>
+              <p className={item.price_change_percentage_24h > 0 ? "text-green-600 text-center items-center":"text-red-600 text-center items-center"}>{Math.round(item.price_change_percentage_24h*100)/100}</p>
+              {/* Market Cap - Hidden on medium screens and below */}
+              <p className="text-right hidden md:block">{currency.symbol} {item.market_cap.toLocaleString()}</p>
             </div>
           ))
         }

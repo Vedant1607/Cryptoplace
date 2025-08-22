@@ -1,7 +1,8 @@
-import Navbar from "@/components/Navbar/Navbar.jsx";
 import { Routes, Route } from "react-router-dom";
-import Home from "@/pages/Home/Home";
-import Coin from "@/pages/Coin/Coin";
+import Navbar from "@/components/Navbar";
+import Home from "@/pages/Home";
+import Coin from "@/pages/Coin";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
         <Route path="/" element={<Home/>}></Route>
         <Route path="/coin/:coinId" element={<Coin/>}></Route>
       </Routes>
+      <Footer/>
     </div>
   )
 }

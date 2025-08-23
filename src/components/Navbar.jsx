@@ -2,6 +2,7 @@ import logo from "@/assets/logo.png";
 import arrow_icon from "@/assets/arrow_icon.png";
 import { useContext, useState } from "react";
 import { CoinContext } from "@/context/CoinContext";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const { setCurrency } = useContext(CoinContext);
@@ -37,15 +38,19 @@ const Navbar = () => {
       {/* Main Navbar */}
       <div className="flex items-center justify-between py-5 px-[10%] text-[#ddd] border-b-2 border-[#3c3c3c] 
                       lg:px-[8%] md:px-[6%] sm:px-[5%]">
-        <img
-          src={logo}
-          alt="cryptoplace-logo"
-          className="w-[max(12vw,120px)] md:w-[max(15vw,100px)] sm:w-[max(20vw,80px)]"
-        />
+        <Link to={'/'}>
+          <img
+            src={logo}
+            alt="cryptoplace-logo"
+            className="w-[max(12vw,120px)] md:w-[max(15vw,100px)] sm:w-[max(20vw,80px)]"
+          />
+        </Link>
 
         {/* Desktop Menu - Always visible on lg and up */}
         <ul className="hidden lg:flex gap-10 list-none transition-all duration-300 ease-in-out">
-          <li className="cursor-pointer hover:text-white transition-colors duration-200">Home</li>
+          <Link to={'/'}>
+            <li className="cursor-pointer hover:text-white transition-colors duration-200">Home</li>
+          </Link>
           <li className="cursor-pointer hover:text-white transition-colors duration-200">Features</li>
           <li className="cursor-pointer hover:text-white transition-colors duration-200">Pricing</li>
           <li className="cursor-pointer hover:text-white transition-colors duration-200">Blog</li>
@@ -53,7 +58,9 @@ const Navbar = () => {
 
         {/* Tablet Menu - Compact horizontal menu on md screens */}
         <ul className="hidden md:flex lg:hidden gap-4 list-none transition-all duration-300 ease-in-out">
-          <li className="cursor-pointer hover:text-white transition-colors duration-200 text-sm">Home</li>
+          <Link to={'/'}>
+            <li className="cursor-pointer hover:text-white transition-colors duration-200 text-sm">Home</li>
+          </Link>
           <li className="cursor-pointer hover:text-white transition-colors duration-200 text-sm">Features</li>
           <li className="cursor-pointer hover:text-white transition-colors duration-200 text-sm">Pricing</li>
           <li className="cursor-pointer hover:text-white transition-colors duration-200 text-sm">Blog</li>
@@ -65,7 +72,7 @@ const Navbar = () => {
           <button
             onClick={toggleMenu}
             className="md:hidden flex flex-col justify-center items-center w-6 h-6 space-y-1 
-                       transition-all duration-300 ease-in-out cursor-pointer"
+                       transition-all duration-300 ease-in-out"
             aria-label="Toggle menu"
           >
             <span className={`block w-5 h-0.5 bg-white transition-all duration-300 ease-in-out ${
@@ -116,9 +123,11 @@ const Navbar = () => {
                        transition-all duration-300 ease-in-out transform origin-top
                        ${isMenuOpen ? 'opacity-100 scale-y-100 translate-y-0' : 'opacity-0 scale-y-0 -translate-y-2 pointer-events-none'}`}>
         <ul className="flex flex-col px-[10%] py-4 space-y-3">
-          <li className="cursor-pointer hover:text-white transition-colors duration-200 py-2 border-b border-[#3c3c3c]">
-            Home
-          </li>
+          <Link to={'/'} onClick={toggleMenu}>
+            <li className="cursor-pointer hover:text-white transition-colors duration-200 py-2 border-b border-[#3c3c3c]">
+              Home
+            </li>
+          </Link>
           <li className="cursor-pointer hover:text-white transition-colors duration-200 py-2 border-b border-[#3c3c3c]">
             Features
           </li>

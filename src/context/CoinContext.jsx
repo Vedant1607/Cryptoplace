@@ -21,7 +21,6 @@ function CoinContextProvider(props) {
     try {
       const res = await fetch(
         `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency.name}`,
-        options
       );
       if (!res.ok) {
         throw new Error("API call failed: " + res.status);

@@ -4,6 +4,22 @@ import { CoinContext } from "../context/CoinContext";
 const Home = () => {
   const {allCoin, currency} = useContext(CoinContext);
   const [displayCoin, setDisplayCoin] = useState([]);
+  const [input, setInput] = useState('');
+
+  const inputHandler = (event) => {
+    setInput(event.target.value);
+    if (event.target.value === "") {
+      setDisplayCoin(allCoin);
+    }
+  }
+
+  const searchHandler = async (event) => {
+    event.preventDefault();
+    const coins = await allCoin.filter((item) => {
+      return item.name.toLowerCase().includes(input.toLowerCase())
+    })
+    setDisplayCoin(coins);
+  }
 
   useEffect(() => {
     setDisplayCoin(allCoin);
@@ -21,13 +37,22 @@ const Home = () => {
         </p>
 
         {/* Hero form with responsive input width */}
-        <form className="p-2 w-4/5 bg-white rounded-[5px] text-[20px] flex justify-between items-center gap-[10px]">
+        <form onSubmit={searchHandler} className="p-2 w-4/5 bg-white rounded-[5px] text-[20px] flex justify-between items-center gap-[10px]">
           <input
+            onChange={inputHandler}
+            list="coinList"
             type="text"
+            value={input}
             placeholder="Search crypto.."
+            required
             className="flex-1 text-base outline-none border-none pl-3 text-black placeholder-gray-400
                        max-[500px]:w-[100px] max-[500px]:min-w-[100px] max-[500px]:flex-none"
           />
+
+          <datalist id="coinList">
+            {allCoin.map((item, index) => (<option key={index} value={item.name}/>))}
+          </datalist>
+
           <button
             type="submit"
             className="border-none bg-[#7927ff] text-white text-base py-[10px] px-[30px] rounded-[5px] cursor-pointer"
